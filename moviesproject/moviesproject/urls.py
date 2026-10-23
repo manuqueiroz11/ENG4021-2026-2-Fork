@@ -22,6 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home),
     path('home/', home2, name='catalog'),
-    path('movies/new/', movie_create, name='movie_create'),    path('chat/', chat),
+    path('movies/new/', movie_create, name='movie_create'),   
+    path('movies/update/<int:movie_id>', movie_update, name='movie_update'), 
+    path('movies/delete/<int:movie_id>', movie_delete, name='movie_delete'), 
+    path('chat/', chat),
     path('bot/', call_bot)
 ]

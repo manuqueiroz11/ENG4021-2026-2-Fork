@@ -1,0 +1,7 @@
+<p>Você tem certeza que deseja deletar o filme "{{movie.title}}"</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <input name ="Confirm"  type="submit" value="Sim">
+    <input name ="Confirm" type="submit" value="Não">
+</form>

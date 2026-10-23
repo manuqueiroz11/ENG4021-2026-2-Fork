@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Movie
 from .forms import MovieForm
 from django.http import JsonResponse
@@ -22,6 +22,27 @@ def movie_create(request):
 
     return render(request, "movie_form.html", {"form": form, "title": "Novo filme"})
 
+def movie_update(request, movie_id):
+    movie = get_object_or_404(Movie, id = movie_id)
+    if request.method == "POST":
+        form = MovieForm(request.POST, instance=movie)
+        if form.is_valid():
+            form.save()
+            return redirect("catalog")
+    else:
+        form = MovieForm(instance=movie)
+
+    return render(request, "movie_form.html", {"form": form, "title": "Novo filme"})
+
+def movie_delete(request, movie_id):
+    movie = get_object_or_404(Movie, id = movie_id)
+    if request.method == "POST":
+        string_confirm = request.POST["Confirm"]
+        if string_confirm == "Sim":
+            movie.delete()
+        return redirect("catalog")
+    return render(request, "movie_delete.html", {"movie":movie})
+    
 
 GEMINI_API_KEY = ""
 GEMINI_MODEL = "gemini-2.5-flash"

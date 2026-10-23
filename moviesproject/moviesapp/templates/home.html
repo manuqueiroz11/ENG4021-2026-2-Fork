@@ -25,6 +25,8 @@
                 <h5>{{ movie.title }}</h5>
                 <p>{{ movie.description }}</p>
             </div>
+            <a href = "{% url 'movie_update' movie.id %}">Editar</a>
+            <a href = "{% url 'movie_delete' movie.id %}">Remover</a>
         </div>
         {% empty %}
         <p>No movies registered yet.</p>
